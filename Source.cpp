@@ -69,6 +69,10 @@ struct SHOT
 	bool flag;
 	int x;
 	int y;
+	int vx;
+	int vy;
+	int ax;
+	int ay;
 	int gh;
 	int width, height;
 	int abilty;
@@ -133,7 +137,7 @@ int Player::move() {
 		return 0;
 	}
 }
-SHOT* Player::shoot(const int b) {
+SHOT* Player::shoot(const int b) {//ちくわ発射用の関数
 	int j = 1;
 	int k = 0;
 	if (CheckHitKey(KEY_INPUT_1) == 1)j = 1;
@@ -144,14 +148,31 @@ SHOT* Player::shoot(const int b) {
 					bullet[i].flag = TRUE;
 					bullet[i].x = me[0].x + pw;
 					bullet[i].y = me[0].y + ph / 2;
+					bullet[i].ay = 98 / FLAME_RATE;//挙動が流石に草生える。なんで落ちたり落ちなかったりするのかわからん。宿題
 					bullet[i].abilty = 0;
-					for (j = 0; k < 2; j++) {
+					for (j = 0; k < 2; j++) {//3WAYちくわの属性を与える
 						if (bullet[j].flag == false) {
 							bullet[j].flag = TRUE;
 							bullet[j].x = me[0].x + pw;
 							bullet[j].y = me[0].y + ph / 2;
 							k++;
 							bullet[j].abilty = k;
+						}
+						switch (bullet[j].abilty) {
+						case 0:
+							bullet[j].vx = PSHOT_SPEED;
+							bullet[j].vy = 0;
+							break;
+						case 1:
+							bullet[j].vx = PSHOT_SPEED*cos(M_PI / 20);
+							bullet[j].vy = int(PSHOT_SPEED*sin(M_PI / 20));
+							break;
+						case 2:
+							bullet[j].vx = PSHOT_SPEED*cos(M_PI / 20);
+							bullet[j].vy = -(int(PSHOT_SPEED*sin(M_PI / 20)));//カウント変数のミス。気を付けっましょい
+							break;
+						default:
+							break;
 						}
 					}
 					roop = b;
@@ -168,15 +189,22 @@ int Player::draw(int c) {
 	else if (mutekit % 2 == 0) { DrawGraph(me[0].x, me[0].y, me[0].ghandle, TRUE); mutekit--; }
 	else { mutekit--; }
 	for (int i = 0; i < PSHOT_NUM; i++) {
-		if (bullet[i].flag) {
+		if (bullet[i].flag) {//果たしてDRAWで位置更新しても良いのだろうか？保留
+			bullet[i].vy += bullet[i].ay;//下が正方向
 			switch (bullet[i].abilty)
 			{
 			case 0:
-				bullet[i].x += PSHOT_SPEED; break;
+				bullet[i].x += bullet[i].vx;
+				bullet[i].y += bullet[i].vy;
+				break;
 			case 1:
-				bullet[i].x += PSHOT_SPEED*cos(M_PI / 20); bullet[i].y += int(PSHOT_SPEED*sin(M_PI / 20)); break;
+				bullet[i].x += bullet[i].vx;
+				bullet[i].y += bullet[i].vy;
+				break;
 			case 2:
-				bullet[i].x += PSHOT_SPEED*cos(M_PI / 20); bullet[i].y -= int(PSHOT_SPEED*sin(M_PI / 20)); break;
+				bullet[i].x += bullet[i].vx;
+				bullet[i].y += bullet[i].vy;
+				break;
 			default:
 				break;
 			}

@@ -1,10 +1,10 @@
 ﻿  Source.cpp
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(177): warning C4244: '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(179): warning C4244: '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(426): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(429): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(512): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(513): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\visual studio 2015\projects\win32project1\source.cpp(549): warning C4101: 'eg2': ローカル変数は 1 度も使われていません。
-  Win32Project1.vcxproj -> C:\Users\waku\Documents\Visual Studio 2015\Projects\Win32Project1\Debug\Win32Project1.exe
-  Win32Project1.vcxproj -> C:\Users\waku\Documents\Visual Studio 2015\Projects\Win32Project1\Debug\Win32Project1.pdb (Full PDB)
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(167): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(171): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(454): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(457): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(540): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(541): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(577): warning C4101: 'eg2': ローカル変数は 1 度も使われていません。
+  Win32Project1.vcxproj -> C:\Users\waku\Documents\GitHub\Chikuwa-Bluster\Debug\Win32Project1.exe
+  Win32Project1.vcxproj -> C:\Users\waku\Documents\GitHub\Chikuwa-Bluster\Debug\Win32Project1.pdb (Partial PDB)
