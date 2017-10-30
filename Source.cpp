@@ -19,10 +19,10 @@ class title {
 	bool select = TRUE;
 public:
 	title(int a, int b, int c, int d) :logo(a), haikei(b), font(c), font2(d) { GetGraphSize(logo, &w, &h); }
-	int start(int a);
-	int help(int a);
+	int start(int);
+	int help(int);
 };
-int title::start(int a) {
+int title::start(int) {
 	int rot = 0;
 	rot = GetMouseWheelRotVol();
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -48,7 +48,7 @@ int title::start(int a) {
 	return 0;
 }
 
-int title::help(int a) {
+int title::help(int) {
 	SetDrawScreen(DX_SCREEN_BACK);
 	DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, haikei, TRUE);
 	DrawGraph(SCREEN_WIDTH / 2 - w / 2, 0, logo, TRUE);
@@ -99,13 +99,13 @@ class Player
 	SHOT bullet[PSHOT_NUM];
 	LIFE me[1];
 public:
-	Player(int a);
+	Player(int);
 	int move();
 	SHOT* shoot(int b);
-	int draw(int c);
+	int draw(int);
 	int detecthit(SHOT* a);
 };
-Player::Player(int a) {
+Player::Player(int) {
 	me[0].live = TRUE;
 	me[0].x = 0;
 	me[0].y = 0;
@@ -127,7 +127,6 @@ Player::Player(int a) {
 	roop = 0;
 }
 int Player::move() {
-	for (;;) {
 		GetMousePoint(&me[0].x, &me[0].y);
 		if (me[0].x <= 0) { me[0].x = 0; /*SetMousePoint(0, me[0].y);*/ }
 		if (me[0].x >= SCREEN_WIDTH - 30) { me[0].x = SCREEN_WIDTH - 30; SetMousePoint(SCREEN_WIDTH - 20, me[0].y); }
@@ -135,56 +134,46 @@ int Player::move() {
 		if (me[0].y >= SCREEN_HEIGHT - ph) { me[0].y = SCREEN_HEIGHT - ph; SetMousePoint(me[0].x, SCREEN_HEIGHT - ph); }
 		//if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)death = 0;
 		return 0;
-	}
 }
 SHOT* Player::shoot(const int b) {//ちくわ発射用の関数
 	int j = 1;
-	int k = 0;
 	if (CheckHitKey(KEY_INPUT_1) == 1)j = 1;
 	if (me[0].live) {
 		if (b - roop > 3) {
-			for (int i = 0; i < PSHOT_NUM; i++) {
+			int k = 0;
+			for (int i = 0; i < PSHOT_NUM &&k<3; i++) {
 				if (bullet[i].flag == false) {
 					bullet[i].flag = TRUE;
 					bullet[i].x = me[0].x + pw;
 					bullet[i].y = me[0].y + ph / 2;
-					bullet[i].ay = 98 / FLAME_RATE;//挙動が流石に草生える。なんで落ちたり落ちなかったりするのかわからん。宿題
-					bullet[i].abilty = 0;
-					for (j = 0; k < 2; j++) {//3WAYちくわの属性を与える
-						if (bullet[j].flag == false) {
-							bullet[j].flag = TRUE;
-							bullet[j].x = me[0].x + pw;
-							bullet[j].y = me[0].y + ph / 2;
-							k++;
-							bullet[j].abilty = k;
-						}
-						switch (bullet[j].abilty) {
+					bullet[i].ay = 98 / FLAME_RATE;//挙動が流石に草生える。なんで落ちたり落ちなかったりするのかわからん。小数周りの問題。丸め方を考えるかDOUBLE使え
+					bullet[i].abilty = k;
+					k++;
+						switch (bullet[i].abilty) {
 						case 0:
-							bullet[j].vx = PSHOT_SPEED;
-							bullet[j].vy = 0;
+							bullet[i].vx = PSHOT_SPEED;
+							bullet[i].vy = 0;
 							break;
 						case 1:
-							bullet[j].vx = PSHOT_SPEED*cos(M_PI / 20);
-							bullet[j].vy = int(PSHOT_SPEED*sin(M_PI / 20));
+							bullet[i].vx = PSHOT_SPEED*cos(M_PI / 20);
+							bullet[i].vy = int(PSHOT_SPEED*sin(M_PI / 20));
 							break;
 						case 2:
-							bullet[j].vx = PSHOT_SPEED*cos(M_PI / 20);
-							bullet[j].vy = -(int(PSHOT_SPEED*sin(M_PI / 20)));//カウント変数のミス。気を付けっましょい
+							bullet[i].vx = PSHOT_SPEED*cos(M_PI / 20);
+							bullet[i].vy = -(int(PSHOT_SPEED*sin(M_PI / 20)));//カウント変数のミス。気を付けっましょい
 							break;
 						default:
 							break;
 						}
 					}
-					roop = b;
-					break;
-				}
 			}
+			roop = b;
 		}
 	}
 	return bullet;
 }
 
-int Player::draw(int c) {
+int Player::draw(int) {
 	if (me[0].live)DrawGraph(me[0].x, me[0].y, me[0].ghandle, TRUE);
 	else if (mutekit % 2 == 0) { DrawGraph(me[0].x, me[0].y, me[0].ghandle, TRUE); mutekit--; }
 	else { mutekit--; }
@@ -271,7 +260,7 @@ public:
 	SHOT* shoot(int b);
 	int move(int d);
 	int move2(int e);
-	int move3(int f);
+	int move3(int);
 	int draw(int c);
 	int detecthit(SHOT* a);
 };
@@ -323,7 +312,7 @@ SHOT* Enemy::shoot(int b) {
 		if (teki[i].live)l++;
 	}
 	int j = 1;
-	int h = GetRand(ENEMY_NUM);
+	int h = GetRand(ENEMY_NUM-1);
 	if (CheckHitKey(KEY_INPUT_1) == 1)j = 1;
 	if (b - roop > 2) {
 		if (teki[h].live) {
@@ -339,8 +328,8 @@ SHOT* Enemy::shoot(int b) {
 					case 1:
 						for (int k = 0; k < 3; k++) {
 							for (; ; i++) {
-								if (i > ESHOT_NUM)i = 0;
-								if (!bullet[i].flag)break;
+								if (i >= ESHOT_NUM)i = 0;
+								if (!bullet[i].flag)break;//ここフリーズの危険性あり
 							}
 							bullet[i].flag = TRUE;
 							bullet[i].x = teki[h].x;
@@ -352,7 +341,7 @@ SHOT* Enemy::shoot(int b) {
 					default:
 						break;
 					}
-					i = PSHOT_NUM;
+					i = ESHOT_NUM;
 					roop = b;
 				}
 			}
@@ -411,7 +400,7 @@ int Enemy::move2(int e) {
 	return 0;
 }
 
-int Enemy::move3(int f) {
+int Enemy::move3(int) {
 	for (int i = 0; i < ENEMY_NUM; i++) {
 		if (TRUE) {
 			teki[i].x -= (GetRand(5)) * teki[i].vecx;
@@ -517,7 +506,7 @@ public:
 	int clear(int d, int e, int f);
 	int resurrect(int& b);
 };
-Gameover::Gameover(int a) {
+Gameover::Gameover(int) {
 	font = CreateFontToHandle(NULL, 40, 3);
 	ClearDrawScreen();
 };
@@ -532,7 +521,7 @@ void Gameover::end(int c) {
 int Gameover::resurrect(int& score) {
 	SetDrawScreen(DX_SCREEN_BACK);
 	ClearDrawScreen();
-	for (;;) {
+	for (; ProcessMessage() == 0;) {
 		int rot = 0;
 		rot = GetMouseWheelRotVol();
 		DrawFormatStringToHandle(SCREEN_WIDTH / 3, SCREEN_HEIGHT / 3, GetColor(255, 255, 255), font, "スコア：%d", score);
@@ -570,6 +559,8 @@ int Gameover::clear(int d, int e, int f) {
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
+	ChangeWindowMode(TRUE);
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
 	{
 		return -1;			// エラーが起きたら直ちに終了
@@ -581,9 +572,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	SHOT *p = NULL;
 	SHOT *e = NULL;
 	//SetUse3DFlag(FALSE);
-	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);
 	SetDrawScreen(DX_SCREEN_BACK);
-	ChangeWindowMode(TRUE);
 	SetWindowSizeChangeEnableFlag(TRUE);
 	SetMouseDispFlag(FALSE);
 	font = CreateFontToHandle(NULL, 40, 3, -1);
@@ -595,14 +584,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//eg2 = LoadGraph("さつまあげ.png");
 retry:
 
-	Player system(1);
+	Player sakana(1);
 	Enemy teki(eg);
 	//Enemy2 teki2(eg2);
 	title taitoru(logo, seaback, font, font2);
 	Gameover owata(0);
 	life = 3;
 	score = 0;
-	for (i = 0; i < 2;) {
+	for (i = 0; i < 2 && ProcessMessage() == 0;) {
 		ClearDrawScreen();
 
 		if (i == 0) {
@@ -618,11 +607,11 @@ retry:
 		//if (ProcessMessage() == 0 && GetMovieStateToGraph(mountback) != 1) { SeekMovieToGraph(mountback, FLAME_RATE);  PlayMovieToGraph(mountback); }
 		ClearDrawScreen();
 		DrawExtendGraph(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, mountback, FALSE);
-		p = system.shoot(i);
+		p = sakana.shoot(i);
 		e = teki.shoot(i);
-		system.draw(0);
-		system.move();
-		life -= system.detecthit(e);
+		sakana.draw(0);
+		sakana.move();
+		life -= sakana.detecthit(e);
 		//teki.move3(i);
 		if (teki.draw(score) == 1) { if(owata.clear(score, life, i)==1)goto retry; else break; }
 		score += teki.detecthit(p);
@@ -641,7 +630,6 @@ retry:
 			else { owata.end(score); break; }
 		}
 		ScreenFlip();
-		WaitTimer(1000 / FLAME_RATE);
 	}
 	DxLib_End();	// ＤＸライブラリ使用の終了処理
 

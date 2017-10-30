@@ -1,10 +1,10 @@
 ﻿  Source.cpp
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(167): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(171): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(454): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(457): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(540): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(541): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
-c:\users\waku\documents\github\chikuwa-bluster\source.cpp(577): warning C4101: 'eg2': ローカル変数は 1 度も使われていません。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(158): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(162): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(443): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(446): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(529): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(530): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\waku\documents\github\chikuwa-bluster\source.cpp(568): warning C4101: 'eg2': ローカル変数は 1 度も使われていません。
   Win32Project1.vcxproj -> C:\Users\waku\Documents\GitHub\Chikuwa-Bluster\Debug\Win32Project1.exe
   Win32Project1.vcxproj -> C:\Users\waku\Documents\GitHub\Chikuwa-Bluster\Debug\Win32Project1.pdb (Partial PDB)
