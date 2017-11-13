@@ -629,6 +629,7 @@ retry:
 			}
 			else { owata.end(score); break; }
 		}
+		if (ProcessMessage() == -1)break;
 		ScreenFlip();
 	}
 	DxLib_End();	// ＤＸライブラリ使用の終了処理
